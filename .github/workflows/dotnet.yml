@@ -1,0 +1,54 @@
+name: .NET Build & Publish
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    # A standard Ubuntu runner is faster and cheaper unless you strictly need Windows-only tests
+    runs-on: ubuntu-latest 
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET 10 SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x' # Tailored to your target runtime
+
+    - name: Run Tests
+      run: dotnet test --configuration Release
+
+    - name: Publish Executable (Windows x64)
+      run: |
+        dotnet publish BattleNGDP.csproj \
+          -c Release \
+          -r win-x64 \
+          -p:PublishSingleFile=true \
+          -p:SelfContained=true \
+          -o ./publish/windows
+          
+    - name: Publish Executable (Linux x64)
+      run: |
+        dotnet publish BattleNGDP.csproj \
+          -c Release \
+          -r linux-x64 \
+          -p:PublishSingleFile=true \
+          -p:SelfContained=true \
+          -o ./publish/linux
+
+    - name: Upload Windows Binaries
+      uses: actions/upload-artifact@v4
+      with:
+        name: ConsoleApp-Windows
+        path: ./publish/windows/
+
+    - name: Upload Linux Binaries
+      uses: actions/upload-artifact@v4
+      with:
+        name: ConsoleApp-Linux
+        path: ./publish/linux/
