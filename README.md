@@ -3,12 +3,11 @@
 **BattleNGDP** is an open-source tool designed for the downloading, decryption, and parsing of files from Blizzard's
 Next Generation Data Pipeline ([NGDP](https://wowdev.wiki/NGDP)).
 
+**License: MIT**
 
 ---
 
-**License: TBD**
-
----
+![Command line example of BattleNGDP parsing build manifest files](Misc/Example.png)
 
 ## Features
 
