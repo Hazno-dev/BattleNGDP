@@ -5,6 +5,13 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Title>BattleNGDP</Title>
+        <Authors>Hazno</Authors>
+        <Description>An open-source tool for downloading, parsing and decryption from Blizzards NGDP asset system.</Description>
+        <PackageProjectUrl>https://github.com/Hazno-dev/BattleNGDP</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/Hazno-dev/BattleNGDP/blob/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/Hazno-dev/BattleNGDP</RepositoryUrl>
+        <RepositoryType>Github</RepositoryType>
     </PropertyGroup>
 
     <ItemGroup>
@@ -16,4 +23,10 @@
         <PackageReference Include="System.CommandLine" Version="3.0.0-rc.3.26522.148"/>
     </ItemGroup>
 
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+        <PublishSingleFile>true</PublishSingleFile>
+        <SelfContained>true</SelfContained>
+        <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+        <DebugType>none</DebugType>
+    </PropertyGroup>
 </Project>
